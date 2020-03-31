@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="asset/css/app.css" rel="stylesheet">		
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xUliin2HEtAYliZ0Vfk7mvkv"></script>
+<script src="asset/js/utils.js"></script>
+<title>攻城</title>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">          
+        <a class="navbar-brand" href="index.htm">攻城</a>
+        <ul class="nav navbar-nav nav-pills">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span><span id="info-username">Thomas</span><b class="caret"></b>
+          </a>
+         
+          <ul class="dropdown-menu">
+            <li><a href="login.htm">登录</a></li>
+            <li><a href="register.htm">注册</a></li>
+            <li><a href="setting.htm">设置</a></li>
+            <li><a href="#" onclick="logout();">注销</a></li>
+          </ul>
+        </li>
+        </ul>
+    </div>
+  </nav>
+  
+  <form id="myform" class="form-horizontal" role="form" action="ticket.htm">
+
+    <div class="form-group">
+      <div class="col-sm-12">
+        <p>
+          地区：<span id="info-project"></span>
+        </p>
+        <p id="div-tinfo">
+          守城兵力：1分队(<span class="tinfo" id="info-team1">1</span>), 2分队(<span class="tinfo" id="info-team2">2</span>), 3分队(<span class="tinfo" id="info-team3">3</span>)
+        </p>
+        <p>
+          <div id="div-error" class="alert alert-warning"><span id="info-error">错误！</span></div>
+          <div id="div-succ" class="alert alert-success"><span id="info-succ"></span></div>    
+        </p>
+        <table class="table table-bordered">   
+         <tbody>
+            <tr>
+               <td class="clabel"></td>
+               <td class="clabel">A</td>
+               <td class="clabel">B</td>
+               <td class="clabel">C</td>
+               <td class="clabel">D</td>
+               <td class="clabel">E</td>
+               <td class="clabel">F</td>
+               <td class="clabel">G</td>
+               <td class="clabel">H</td>
+               <td class="clabel">I</td>
+            </tr>
+            <tr>
+               <td class="clabel">1</td>
+               <td class="cmap" id="A-1"></td>
+               <td class="cmap" id="B-1"></td>
+               <td class="cmap" id="C-1"></td>
+               <td class="cmap" id="D-1"></td>
+               <td class="cmap" id="E-1"></td>
+               <td class="cmap" id="F-1"></td>
+               <td class="cmap" id="G-1"></td>
+               <td class="cmap" id="H-1"></td>
+               <td class="cmap" id="I-1"></td>
+            </tr>
+            <tr>
+               <td class="clabel">2</td>
+               <td class="cmap" id="A-2"></td>
+               <td class="cmap" id="B-2"></td>
+               <td class="cmap" id="C-2"></td>
+               <td class="cmap" id="D-2"></td>
+               <td class="cmap" id="E-2"></td>
+               <td class="cmap" id="F-2"></td>
+               <td class="cmap" id="G-2"></td>
+               <td class="cmap" id="H-2"></td>
+               <td class="cmap" id="I-2"></td>
+            </tr>
+            <tr>
+               <td class="clabel">3</td>
+               <td class="cmap" id="A-3"></td>
+               <td class="cmap" id="B-3"></td>
+               <td class="cmap" id="C-3"></td>
+               <td class="cmap" id="D-3"></td>
+               <td class="cmap" id="E-3"></td>
+               <td class="cmap" id="F-3"></td>
+               <td class="cmap" id="G-3"></td>
+               <td class="cmap" id="H-3"></td>
+               <td class="cmap" id="I-3"></td>
+            </tr>
+            <tr>
+               <td class="clabel">4</td>
+               <td class="cmap" id="A-4"></td>
+               <td class="cmap" id="B-4"></td>
+               <td class="cmap" id="C-4"></td>
+               <td class="cmap" id="D-4"></td>
+               <td class="cmap" id="E-4"></td>
+               <td class="cmap" id="F-4"></td>
+               <td class="cmap" id="G-4"></td>
+               <td class="cmap" id="H-4"></td>
+               <td class="cmap" id="I-4"></td>
+            </tr>
+            <tr>
+               <td class="clabel">5</td>
+               <td class="cmap" id="A-5"></td>
+               <td class="cmap" id="B-5"></td>
+               <td class="cmap" id="C-5"></td>
+               <td class="cmap" id="D-5"></td>
+               <td class="cmap" id="E-5"></td>
+               <td class="cmap" id="F-5"></td>
+               <td class="cmap" id="G-5"></td>
+               <td class="cmap" id="H-5"></td>
+               <td class="cmap" id="I-5"></td>
+            </tr>
+            <tr>
+               <td class="clabel">6</td>
+               <td class="cmap" id="A-6"></td>
+               <td class="cmap" id="B-6"></td>
+               <td class="cmap" id="C-6"></td>
+               <td class="cmap" id="D-6"></td>
+               <td class="cmap" id="E-6"></td>
+               <td class="cmap" id="F-6"></td>
+               <td class="cmap" id="G-6"></td>
+               <td class="cmap" id="H-6"></td>
+               <td class="cmap" id="I-6"></td>
+            </tr>
+            <tr>
+               <td class="clabel">7</td>
+               <td class="cmap" id="A-7"></td>
+               <td class="cmap" id="B-7"></td>
+               <td class="cmap" id="C-7"></td>
+               <td class="cmap" id="D-7"></td>
+               <td class="cmap" id="E-7"></td>
+               <td class="cmap" id="F-7"></td>
+               <td class="cmap" id="G-7"></td>
+               <td class="cmap" id="H-7"></td>
+               <td class="cmap" id="I-7"></td>
+            </tr>
+            <tr>
+               <td class="clabel">8</td>
+               <td class="cmap" id="A-8"></td>
+               <td class="cmap" id="B-8"></td>
+               <td class="cmap" id="C-8"></td>
+               <td class="cmap" id="D-8"></td>
+               <td class="cmap" id="E-8"></td>
+               <td class="cmap" id="F-8"></td>
+               <td class="cmap" id="G-8"></td>
+               <td class="cmap" id="H-8"></td>
+               <td class="cmap" id="I-8"></td>
+            </tr>
+            <tr>
+               <td class="clabel">9</td>
+               <td class="cmap" id="A-9"></td>
+               <td class="cmap" id="B-9"></td>
+               <td class="cmap" id="C-9"></td>
+               <td class="cmap" id="D-9"></td>
+               <td class="cmap" id="E-9"></td>
+               <td class="cmap" id="F-9"></td>
+               <td class="cmap" id="G-9"></td>
+               <td class="cmap" id="H-9"></td>
+               <td class="cmap" id="I-9"></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-center" id="div-btn">
+          <button class="btn btn-large btn-primary" type="button">清空</button>
+          <button class="btn btn-large btn-primary" type="button">撤销</button>
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12">               
+        <input type="hidden" name="project" id="project">
+        <input type="hidden" name="latitude" id="latitude">
+        <input type="hidden" name="longitude" id="longitude">
+        <input type="hidden" name="token" id="token">
+        <input type="hidden" name="deploy" id="deploy">
+        <input type="hidden" name="id" id="id">
+    </div>
+  </form>
+  <div id="allmap" style="display:none"></div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    
+    <div>
+      <ul class="nav nav-pills navbar-nav">
+        <li class="active"><a href="battle.htm">攻城</a></li>
+        <li><a href="myproperty.htm">我的</a></li>
+        <li><a href="ranking.htm">排名</a></li>
+        <li><a href="help.htm">帮助</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- -->
+  <script src="asset/js/battle.js"></script>
+  <script type="text/javascript">
+  userid = getCookie("mono_userid");
+  token = getCookie("mono_token");
+  username = getCookie("mono_username");
+  $("#info-username").replaceWith(username);
+
+  $("#div-error").hide();
+  $("#div-succ").hide();  
+  $("#token").val(token);
+  $("#latitude").val(0);
+  $("#longitude").val(0);
+
+  // 解析参数
+  var req = new Object(); 
+  req = GetRequest();
+  var battleid = req["id"];
+
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");
+  var geoc = new BMap.Geocoder();
+
+  if (battleid!=null&&battleid!="") {
+    requestDeploy(battleid, "", 0, 0);
+  } else {
+    // 获取位置
+    getLocation();
+  }
+
+  function submitData(url) {
+    
+    var s = getDeployString();
+    if (s=="")
+      return;
+
+    $("#deploy").val(s);
+
+    var formdata = $("#myform").serializeArray();
+    $.post(url,    
+      formdata,    
+      function(data,status){      
+        //alert("Data: " + data + " nStatus: " + status);     
+        var obj = JSON.parse(data);        
+        if (obj.error == "0") {
+           $("#div-error").hide();
+           if (obj.ticket == "0") {
+             showTips("部署成功", true);
+           } else if (obj.ticket == "1") {
+             showTips("攻城失败", false);
+           } else if (obj.ticket == "2") {
+             showTips("部署成功", true);
+           } else if (obj.ticket == "3") {
+             showTips("攻城成功", true);
+           } else {
+             showTips("资金不足", false);
+           }
+           $("#div-succ").show();
+        } else {   
+           showTips("部署失败("+obj.error+")！", false);
+        }
+      }); 
+  }
+
+  function getLocation()
+  {
+    if (navigator.geolocation)
+    {
+      navigator.geolocation.getCurrentPosition(showPosition, showError, {maximumAge:3000,timeout:5000,enableHighAccuracy:true});      
+    }
+    else
+    {
+      showError("浏览器不支持获取位置信息");
+    }
+  }
+
+  function showError(error)
+  {
+    showTips("获取位置信息失败", false);
+    switch(error.code) 
+    {
+      case error.PERMISSION_DENIED:
+        break;
+      case error.POSITION_UNAVAILABLE:    
+        break;
+      case error.TIMEOUT:
+        break;
+      case error.UNKNOWN_ERROR:
+        break;
+    }    
+  }
+
+  function showPosition(position)
+  {
+    if (position.coords.latitude==0
+    || position.coords.longitude==0) {
+      showTips("位置信息错误", false);
+      return;
+    }
+
+    $("#latitude").val(position.coords.latitude);
+    $("#longitude").val(position.coords.longitude);
+
+    var point = new BMap.Point(position.coords.longitude, position.coords.latitude);
+    var geoc = new BMap.Geocoder();    
+
+    geoc.getLocation(point, function(rs){      
+      if (rs){      
+        var addComp = rs.addressComponents;
+        var project = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+        $("#project").val(project);
+        $("#info-project").text(project);        
+        requestDeploy("", project,$("#longitude").val(),$("#latitude").val());
+      }
+    });
+  }
+
+  $("span.tinfo").bind("onChange",function(){
+    if ($("#info-team1").text()==0) {
+      $("#info-team1").addClass("tzero");
+    }
+
+    if ($("#info-team2").text()==0) {
+      $("#info-team2").addClass("tzero");
+    }
+
+    if ($("#info-team3").text()==0) {
+      $("#info-team3").addClass("tzero");
+    }
+
+    if ($("#info-team1").text()==0
+      && $("#info-team2").text()==0
+      && $("#info-team3").text()==0) {
+      sendWin($("#id").val());
+      $("span.tinfo").unbind("onChange");
+    }
+  });
+
+  $("table").bind("onSubmit", function(){
+    submitData("do_deploy.php");
+  });
+
+  $("button").click(function(){
+    var tittle = $(this).text();
+    if (tittle == "清空")
+      onResetClick();
+    else if (tittle == "撤销")
+      onUndoClick();
+    else
+      ;
+  });
+  
+  </script>
+</body>
+</html>

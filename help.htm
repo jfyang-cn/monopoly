@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="asset/css/app.css" rel="stylesheet">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="asset/js/utils.js"></script>
+<title>使用帮助</title>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">          
+        <a class="navbar-brand" href="index.htm">攻城</a>
+        <ul class="nav navbar-nav nav-pills">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span><span id="info-username">Thomas</span><b class="caret"></b>
+          </a>
+         
+          <ul class="dropdown-menu">
+            <li><a href="login.htm">登录</a></li>
+            <li><a href="register.htm">注册</a></li>
+            <li><a href="setting.htm">设置</a></li>
+            <li><a href="#" onclick="logout();">注销</a></li>
+          </ul>
+        </li>
+        </ul>
+    </div>
+  </nav>
+
+<p>未登录用户只可以攻城，但无论输赢都无法取得城池。如果您还没有账户，请先<a href="register.htm">注册</a>，然后<a href="login.htm">登录</a>。攻城游戏有两种操作：</p>
+<ul>
+  <li><b>部署</b>，当您到达一个新的位置时，如果该地区未被他人占领，可进行部署操作。每个城池有三个中队（1中队1人，2中队2人，3中队3人）可供调拨，您可将三个中队在地图上按照横竖或斜的方式排开。</li>
+    <img src="asset/images/deploy.PNG" />
+  <li><b>攻城</b>，当您到达一个新的位置时，如果该地区已被他人占领，可进行攻城操作。每次攻城共有5枚炸弹可供使用，1枚炸弹的攻击面积为9格（3x3），您只需指出中心位置即可。
+      每投放1枚炸弹，顶部提示区会提示您守城士兵的剩余人数，当剩余人数降为0时，攻城成功，该城池将归属到您的名下。新攻占的城池请及时在<a href="myproperty.htm">此处</a>查询并更换部署，否则会很容易被其他人再次攻破。</li>
+    <img src="asset/images/battle.PNG" />
+  <li>您也可以从<a href="index.htm">主页</a>选择其他人占领的地区攻城。</li>
+    <img src="asset/images/list.PNG" />
+</ul>
+<p>如果有疑问或者建议请联系<a href="mailto:jf.yang@hotmail.com">jf.yang@hotmail.com</a></p>
+
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <div>
+      <ul class="nav nav-pills navbar-nav">
+        <li><a href="battle.htm">攻城</a></li>
+        <li><a href="myproperty.htm">我的</a></li>
+        <li><a href="ranking.htm">排名</a></li>
+        <li class="active"><a href="help.htm">帮助</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- -->  
+  <script type="text/javascript">
+  username = getCookie("mono_username");
+  $("#info-username").text(username);
+  </script>
+</body>
+</html>

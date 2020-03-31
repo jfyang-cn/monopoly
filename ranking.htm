@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="asset/css/app.css" rel="stylesheet">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="asset/js/utils.js"></script>
+<title>排名</title>
+<body>
+ 
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">          
+        <a class="navbar-brand" href="index.htm">攻城</a>
+        <ul class="nav navbar-nav nav-pills">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span><span id="info-username">Thomas</span><b class="caret"></b>
+          </a>
+         
+          <ul class="dropdown-menu">
+            <li><a href="login.htm">登录</a></li>
+            <li><a href="register.htm">注册</a></li>
+            <li><a href="setting.htm">设置</a></li>
+            <li><a href="#" onclick="logout();">注销</a></li>
+          </ul>
+        </li>
+        </ul>
+    </div>
+  </nav>   
+  
+  <div class="table-responsive">
+     <table class="table">        
+        <thead>
+           <tr>
+              <th>排名</th>
+              <th>用户名</th>
+              <th>城池数</th>              
+           </tr>
+        </thead>
+        <tbody id="tab">
+
+        </tbody>
+     </table>
+    </div>    
+
+  <form id="myform" class="form-horizontal" role="form" action="ticket.htm">
+    <input type="hidden" id="token" name="token">
+  </form>
+
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">    
+    <div>
+      <ul class="nav nav-pills navbar-nav">
+        <li><a href="battle.htm">攻城</a></li>
+        <li><a href="myproperty.htm">我的</a></li>
+        <li class="active"><a href="ranking.htm">排名</a></li>
+        <li><a href="help.htm">帮助</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- -->  
+  <script type="text/javascript">
+  username = getCookie("mono_username");
+  $("#info-username").replaceWith(username);
+
+  var token = getCookie("mono_token");
+  $("#token").val(token);
+  var formdata = $("#myform").serializeArray();
+
+  $.post("do_ranking.php",    
+    formdata,
+    function(data,status){
+      //alert("Data: " + data + " nStatus: " + status);     
+      var obj = JSON.parse(data);     
+      if (obj.error == "0") {        
+        for(var i in obj.datalists){
+          var d = obj.datalists[i];    
+          $("#tab").append("<tr><td>"+(parseInt(i,10)+1)+"</td><td>"
+            +d.username+"</td><td>"
+            +d.property_num
+            +"</td></tr>");
+        }/* for */  
+      } else {   
+        ;
+      }     
+    });  
+
+  </script>
+    
+</body>
+</html>

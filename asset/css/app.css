@@ -1,0 +1,41 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+li {
+  margin-top:10px;
+}
+
+td { 
+  word-wrap:
+  break-word;
+}
+
+.city {
+  display:none;
+}
+
+
+.selected {
+  background:#aaa; 
+  color:#fff; 
+}
+
+.tinfo {
+  font-size:120%;
+  color:red;
+  font-weight:bold;
+}
+
+.tzero {
+  font-size:120%;
+  color:blue;
+  font-weight:bold;
+}
+
+.note {
+  background-color:yellow;
+}

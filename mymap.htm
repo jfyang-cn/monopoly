@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+		#golist {display: none;}
+		@media (max-device-width: 780px){#golist{display: block !important;}}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xUliin2HEtAYliZ0Vfk7mvkv"></script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="asset/js/utils.js"></script>
+	<title>我的资产地图</title>
+</head>
+<body>
+  <a id="golist" href="myproperty.htm">返回</a>
+  <div id="allmap"></div>
+  <form id="myform" class="form-horizontal" role="form" action="ticket.htm">
+    <input type="hidden" id="token" name="token">
+  </form>
+
+<script type="text/javascript">
+
+  username = getCookie("mono_username");
+  avatar = getCookie("mono_avatar");
+
+  //$("#info-username").replaceWith(username);
+
+  var token = getCookie("mono_token");
+  $("#token").val(token);
+  var formdata = $("#myform").serializeArray();
+
+  $.post("do_myproperty.php",    
+    formdata,
+    function(data,status){
+      //alert("Data: " + data + " nStatus: " + status);     
+      var obj = JSON.parse(data);     
+      if (obj.error == "0") {
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");            // 创建Map实例
+        map.enableScrollWheelZoom(true);
+        map.enableDragging();
+        //map.addControl(new BMap.ZoomControl());      //添加地图缩放控件
+        var myIcon;
+        if (avatar!= null && avatar != "") {
+          myIcon = new BMap.Icon(avatar, new BMap.Size(240,240));
+          myIcon.setImageSize(new BMap.Size(60,60));
+          myIcon.setImageOffset(new BMap.Size(90,90));
+        } else {
+          myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/fox.gif", new BMap.Size(300,157));
+        }
+
+        for(var i in obj.datalists){
+          var d = obj.datalists[i];
+          var point = new BMap.Point(d.longitude, d.latitude);
+          if (i == 0) {
+            map.centerAndZoom(point,18);                 // 初始化地图,设置中心点坐标和地图级别。
+          }
+                 
+          var marker = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+          map.addOverlay(marker);              // 将标注添加到地图中
+
+          //var pt= new BMap.Point(d.longitude, d.latitude);
+          var circle = new BMap.Circle(point,50);
+          circle.setStrokeColor("#A6CBA1"); //边线颜色
+          map.addOverlay(circle);         
+
+        }/* for */
+
+        $("#info-deposit").replaceWith(obj.deposit);
+        $("#info-property").replaceWith(obj.property_num);     
+      } else {   
+        ;
+      }     
+    }); 
+</script>
+
+</body>
+</html>

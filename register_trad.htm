@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="asset/css/app.css" rel="stylesheet">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="asset/js/utils.js"></script>
+<title>注册</title>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">          
+        <a class="navbar-brand" href="index.htm">攻城</a>
+        <ul class="nav navbar-nav nav-pills">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span><span id="info-username"></span><b class="caret"></b>
+          </a>
+         
+          <ul class="dropdown-menu">
+            <li><a href="login.htm">登录</a></li>
+            <li><a href="register.htm">注册</a></li>
+            <li><a href="setting.htm">设置</a></li>
+            <li><a href="#" onclick="logout();">注销</a></li>
+          </ul>
+        </li>
+        </ul>
+    </div>
+  </nav>
+    
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">    
+    <div>
+      <ul class="nav nav-pills navbar-nav">
+        <li><a href="battle.htm">攻城</a></li>
+        <li><a href="myproperty.htm">我的</a></li>
+        <li><a href="ranking.htm">排名</a></li>
+        <li><a href="help.htm">帮助</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <form id="myform" class="form-horizontal" role="form" action="login.htm">
+    <div class="alert alert-warning">为了您的信息安全，请不要使用QQ/微信，银行密码，身份证等重要隐私信息作为您的登录账号或密码，以防信息泄露给你带来不必要的损失。</div>
+    <div class="form-group">
+      <label for="firstname" class="col-sm-2 control-label">用户名</label>
+      <div class="col-sm-10">
+        <input type="text" name="username" id="username" maxlength="40" class="form-control" placeholder="手机号码/邮箱(6~40个数字或字母)">
+      </div>
+    </div>
+   
+    <div class="form-group">
+      <label for="firstname" class="col-sm-2 control-label">密码</label>
+      <div class="col-sm-10">
+        <input type="password" name="password" id="password" maxlength="40" class="form-control" placeholder="密码(6~40个数字或字母)">
+      </div>
+    </div>
+    
+    <div id="div-error" class="alert alert-warning"><span id="info-error">注册失败！</span></div>
+    <div id="div-succ" class="alert alert-success"><span id="info-succ">注册成功！3秒后返回登录页面</span></div>
+    
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button class="btn btn-large btn-primary" type="button">注册</button>
+        已有帐号？<a href="login.htm">返回登录</a>
+      </div>
+    </div>
+  </form>
+
+  <!-- -->
+  <script type="text/javascript">
+  userid = getCookie("mono_userid");
+  token = getCookie("mono_token");
+  username = getCookie("mono_username");
+
+  $("#info-username").text(username);
+
+  $("#div-succ").hide();
+  $("#div-error").hide();
+
+  $("#username").bind("change", usernameVerifier);
+  $("#password").bind("change", passwordVerifier);
+  
+  $("button").click(function(){
+    if (!usernameVerifier() || !passwordVerifier())
+      return;
+
+    var formdata = $("#myform").serializeArray();    
+    
+    $.post("do_register.php",
+    formdata,
+    function(data,status){
+      //alert("Data: " + data + " nStatus: " + status);
+      var obj = JSON.parse(data);
+      if (obj.error == "0") {
+        showTips("注册成功！3秒后返回登录页面", true);
+        setTimeout("location.href = 'login.htm';", 3000);
+      } else {
+        showTips("注册失败！", false);
+      }
+      
+    });
+  });
+  </script>
+</body>
+</html>

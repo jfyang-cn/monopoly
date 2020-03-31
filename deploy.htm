@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Bootstrap -->
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<title>Real Monopoly</title>
+<body>
+  <nav class="navbar navbar-inverse navbar-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.htm">攻城</a>
+ 
+   </div>
+    <div>     
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-user"></span>Thomas<b class="caret"></b>
+          </>
+         
+          <ul class="dropdown-menu">
+            <li><a href="#">注销</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="declare.htm">申购资产</a></li>
+        <li><a href="myproperty.htm">我的资产</a></li>
+        <li><a href="ranking.htm">资产排名</a></li>
+        <li><a href="help.htm">使用帮助</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  
+  <a href="#" onclick="onResetClick()">重新部署</a><a href="#" onclick="onDeployClick()">提交部署</a><a href="#" onclick="onUndoClick()">撤销</a>
+  <span class="cmap" id="info-tips"></span>
+  <table class="table table-bordered">   
+   <tbody>
+      <tr>
+         <td class="clabel"></td>
+         <td class="clabel">A</td>
+         <td class="clabel">B</td>
+         <td class="clabel">C</td>
+         <td class="clabel">D</td>
+         <td class="clabel">E</td>
+         <td class="clabel">F</td>
+         <td class="clabel">G</td>
+         <td class="clabel">H</td>
+         <td class="clabel">I</td>
+      </tr>
+      <tr>
+         <td class="clabel">1</td>
+         <td class="cmap" id="A-1"></td>
+         <td class="cmap" id="B-1"></td>
+         <td class="cmap" id="C-1"></td>
+         <td class="cmap" id="D-1"></td>
+         <td class="cmap" id="E-1"></td>
+         <td class="cmap" id="F-1"></td>
+         <td class="cmap" id="G-1"></td>
+         <td class="cmap" id="H-1"></td>
+         <td class="cmap" id="I-1"></td>
+      </tr>
+      <tr>
+         <td class="clabel">2</td>
+         <td class="cmap" id="A-2"></td>
+         <td class="cmap" id="B-2"></td>
+         <td class="cmap" id="C-2"></td>
+         <td class="cmap" id="D-2"></td>
+         <td class="cmap" id="E-2"></td>
+         <td class="cmap" id="F-2"></td>
+         <td class="cmap" id="G-2"></td>
+         <td class="cmap" id="H-2"></td>
+         <td class="cmap" id="I-2"></td>
+      </tr>
+      <tr>
+         <td class="clabel">3</td>
+         <td class="cmap" id="A-3"></td>
+         <td class="cmap" id="B-3"></td>
+         <td class="cmap" id="C-3"></td>
+         <td class="cmap" id="D-3"></td>
+         <td class="cmap" id="E-3"></td>
+         <td class="cmap" id="F-3"></td>
+         <td class="cmap" id="G-3"></td>
+         <td class="cmap" id="H-3"></td>
+         <td class="cmap" id="I-3"></td>
+      </tr>
+      <tr>
+         <td class="clabel">4</td>
+         <td class="cmap" id="A-4"></td>
+         <td class="cmap" id="B-4"></td>
+         <td class="cmap" id="C-4"></td>
+         <td class="cmap" id="D-4"></td>
+         <td class="cmap" id="E-4"></td>
+         <td class="cmap" id="F-4"></td>
+         <td class="cmap" id="G-4"></td>
+         <td class="cmap" id="H-4"></td>
+         <td class="cmap" id="I-4"></td>
+      </tr>
+      <tr>
+         <td class="clabel">5</td>
+         <td class="cmap" id="A-5"></td>
+         <td class="cmap" id="B-5"></td>
+         <td class="cmap" id="C-5"></td>
+         <td class="cmap" id="D-5"></td>
+         <td class="cmap" id="E-5"></td>
+         <td class="cmap" id="F-5"></td>
+         <td class="cmap" id="G-5"></td>
+         <td class="cmap" id="H-5"></td>
+         <td class="cmap" id="I-5"></td>
+      </tr>
+      <tr>
+         <td class="clabel">6</td>
+         <td class="cmap" id="A-6"></td>
+         <td class="cmap" id="B-6"></td>
+         <td class="cmap" id="C-6"></td>
+         <td class="cmap" id="D-6"></td>
+         <td class="cmap" id="E-6"></td>
+         <td class="cmap" id="F-6"></td>
+         <td class="cmap" id="G-6"></td>
+         <td class="cmap" id="H-6"></td>
+         <td class="cmap" id="I-6"></td>
+      </tr>
+      <tr>
+         <td class="clabel">7</td>
+         <td class="cmap" id="A-7"></td>
+         <td class="cmap" id="B-7"></td>
+         <td class="cmap" id="C-7"></td>
+         <td class="cmap" id="D-7"></td>
+         <td class="cmap" id="E-7"></td>
+         <td class="cmap" id="F-7"></td>
+         <td class="cmap" id="G-7"></td>
+         <td class="cmap" id="H-7"></td>
+         <td class="cmap" id="I-7"></td>
+      </tr>
+      <tr>
+         <td class="clabel">8</td>
+         <td class="cmap" id="A-8"></td>
+         <td class="cmap" id="B-8"></td>
+         <td class="cmap" id="C-8"></td>
+         <td class="cmap" id="D-8"></td>
+         <td class="cmap" id="E-8"></td>
+         <td class="cmap" id="F-8"></td>
+         <td class="cmap" id="G-8"></td>
+         <td class="cmap" id="H-8"></td>
+         <td class="cmap" id="I-8"></td>
+      </tr>
+      <tr>
+         <td class="clabel">9</td>
+         <td class="cmap" id="A-9"></td>
+         <td class="cmap" id="B-9"></td>
+         <td class="cmap" id="C-9"></td>
+         <td class="cmap" id="D-9"></td>
+         <td class="cmap" id="E-9"></td>
+         <td class="cmap" id="F-9"></td>
+         <td class="cmap" id="G-9"></td>
+         <td class="cmap" id="H-9"></td>
+         <td class="cmap" id="I-9"></td>
+      </tr>
+   </tbody>
+</table>
+ <script type="text/javascript">
+ $("td.cmap").attr("onclick", "onCellClick(this);");
+ $("td.clabel").css("text-align", "center");
+ 
+ var soldiers = [1,2,2,3,3,3,4,4,4,4,5,5,5,5,5];  
+ var cur=0; 
+ var deploys = new Array();
+ 
+ function onCellClick(obj) {   
+   if (cur>=soldiers.length)
+     return;    
+   
+   var i=0;   
+   for (i=0;i<deploys.length;i++) {
+     if (deploys[i]==obj.id) {
+       $("#info-tips").text("请不要相同位置重复部署");
+       return;
+     }
+   }
+   
+   $("#"+obj.id).css('background-color','green');
+   $("#"+obj.id).css('text-align','center');   
+   $("#"+obj.id).text(soldiers[cur]);
+   deploys[cur]=obj.id;
+   cur++;
+   
+   $("#info-tips").text("");
+ }
+ 
+ function onResetClick() {
+    $("td.cmap").text('');
+    $("td.cmap").css('background-color','');
+    cur=0;
+    deploys=[];
+ }
+ 
+ function onUndoClick() {
+   if (cur>0)
+   {
+     $("#"+deploys[cur-1]).css("background-color","");
+     $("#"+deploys[cur-1]).text("");
+     deploys.pop();
+     cur--;
+   }
+ }
+ 
+ function markError(num) {
+   var i=0;
+   
+   for (i=0;i<deploys.length;i++)
+   {
+     if (num==soldiers[i])
+     {
+       $("#"+deploys[i]).css("background-color","red");
+       $("#info-tips").text("部署错误，相同小队的士兵必须成直线排在一起（横，竖，斜）");
+     }
+   }
+ }
+ 
+ function removeMark(num) {
+   var i=0;
+   
+   for (i=0;i<deploys.length;i++)
+   {
+     if (num==soldiers[i])
+     {
+       $("#"+deploys[i]).css("background-color","green");       
+     }
+   }
+ }
+ 
+ function onDeployClick() {
+   var delta=soldiers.length-deploys.length;
+   if (delta>0)
+     $("#info-tips").text("还有"+delta+"个士兵没有部署");
+   
+   var a = new Array();
+   var j=0;
+   var k=0;
+   var i=0;
+   for (j=0;j<5;j++) {
+     for (;i<soldiers.length;i++) {
+       if (j+1==soldiers[i]) {
+         a[k++]=deploys[i];        
+       } else {         
+         if (!checkSoldiers(a)) {
+           markError(j+1);
+         } else {
+           removeMark(j+1);
+         }
+         
+         a=[];
+         k=0;
+         break;
+       }
+     }
+     
+     if (i==soldiers.length) {
+       if (!checkSoldiers(a)) {
+         markError(j+1);
+       } else {
+         removeMark(j+1);
+       }      
+       break;
+     }    
+   }
+ }
+ 
+ function checkSoldiers(a) {
+
+   if (a.length<2)
+     return true;
+   
+   a.sort();   
+   
+   var i=0;
+   for (i=0;i<a.length;i++)
+   {
+     a[i]=a[i].split("").reverse().join("");     
+   }  
+
+   if (a[0].charAt(0).charCodeAt()==a[1].charAt(0).charCodeAt()) {     
+     for (i=0;i<a.length-1;i++) {
+       if (!(a[i].charAt(0).charCodeAt()==a[i+1].charAt(0).charCodeAt()
+       && a[i].charAt(2).charCodeAt()+1==a[i+1].charAt(2).charCodeAt())){
+         return false;
+       }
+     }
+   } else {   
+      for (i=0;i<a.length-1;i++) {      
+       if (!((a[i].charAt(0).charCodeAt()+1==a[i+1].charAt(0).charCodeAt()
+       && a[i].charAt(2).charCodeAt()+1==a[i+1].charAt(2).charCodeAt())
+       || (a[i].charAt(0).charCodeAt()+1==a[i+1].charAt(0).charCodeAt() 
+       && a[i].charAt(2).charCodeAt()==a[i+1].charAt(2).charCodeAt())
+       )){
+         return false;
+       }
+     }
+   }
+   
+   return true;
+ }
+ 
+ </script>
+</body>
+</html>
